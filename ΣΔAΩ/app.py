@@ -93,5 +93,5 @@ def page_not_found(e):
     return redirect(url_for('core', applet = 'home'), code=302)
 
 
-serve(app, host="0.0.0.0", port=8080)
+#serve(app, host="0.0.0.0", port=8080)
 app.run()
