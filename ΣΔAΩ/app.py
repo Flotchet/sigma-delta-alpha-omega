@@ -8,8 +8,10 @@ from importlib import import_module
 from constructors import elements
 BASEDIR = abspath(dirname(__file__))
 APPLETDIR = join(BASEDIR, 'applets')
+CONFIGDIR = join(BASEDIR, 'config')
 
 applets = [f[:-3] for f in listdir(APPLETDIR) if f.endswith('.py')]
+applets.sort()
 #import all applets
 for applet in applets:
     import_module(f'applets.{applet}')
@@ -17,8 +19,24 @@ for applet in applets:
 #make a dictionary of all applets's attributes
 applets_attr = {applet: getattr(import_module(f'applets.{applet}'), applet) for applet in applets}
 
+def ini_reader(location : str) -> dict():
 
-from flask import Flask, render_template, request, url_for, session, Response, g, redirect
+    """Reads an ini file and returns a dictionary with the values"""
+    # This function reads an ini file and returns a dictionary with the values
+
+    with open(location, "r") as file:
+        lines = file.readlines()
+
+    lines = [line.strip() for line in lines if not(line.startswith("#"))]
+    lines = [line.split("=") for line in lines if not(line == "")]
+    lines = [(line[0].strip(), line[1].strip()) for line in lines]
+
+    return dict(lines)
+
+applets_ini = {applet: ini_reader(join(CONFIGDIR, f'{applet}.ini')) for applet in applets}
+
+
+from flask import Flask, render_template, request, url_for, session, Response, g, redirect, Markup as Mk
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.sql import func
 from werkzeug.local import LocalProxy
@@ -51,8 +69,39 @@ app.config["DEBUG"] = True
 
 db = SQLAlchemy(app)
 
-@app.route('/<applet>', methods = ['GET', 'POST', 'PUT'])
+
+
+def menu(element : dict) -> Markup: # type: ignore 
+    """This function returns the menu"""
+    # This function returns the menu
+
+    menu = """
+    <nav id="menu">
+	    <header class="major">
+			<h2>Menu</h2>
+		</header>
+        <ul>
+        """
+            
+    for applet in applets:
+        if int(applets_ini[applet]['min_lvl']) <= element['_attr_lvl'] <= int(applets_ini[applet]['max_lvl']):
+            menu += f"""
+            <li><a href="/{applet}">{applets_ini[applet]['name']}</a></li>
+            """
+    menu += """
+        </ul>
+    </nav>
+    <nav>
+    """
+
+    return Mk(menu)
+
+
+
+@app.route('/<applet>', methods = ['GET', 'POST', 'PUT', 'DELETE', 'SUPER'])
 def core(applet = None):
+
+    
 
     try:
         elem = session['elem']
@@ -66,6 +115,10 @@ def core(applet = None):
         #try to call the applet and pass the elem object and the methods
         elem = applets_attr[applet](elem, request.method, request.form, request.args)
         session['elem'] = elem
+        if not int(applets_ini[applet]['min_lvl']) <= elem['_attr_lvl'] <= int(applets_ini[applet]['max_lvl']):
+            print("not in range")
+            return redirect(url_for('core', applet = 'home'), code=302)
+        
     
     except:
         return redirect(url_for('core', applet = 'home'), code=302)
@@ -75,6 +128,8 @@ def core(applet = None):
         #if not, return the home page
         elem = applets_attr['home'](elem, request.method, request.form, request.args)
         session['elem'] = elem
+
+    elem['menu'] = menu(elem)
 
     return render_template('base.html',
         head = elem['head'],

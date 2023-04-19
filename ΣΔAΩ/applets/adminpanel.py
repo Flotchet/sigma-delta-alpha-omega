@@ -13,36 +13,24 @@ from buttons import * # type: ignore
 from check_user import * # type: ignore 
 from home import home
 
-def login(elem, method, form, args):
+def adminpanel(elem, method, form, args):
 
 	toadd = ""
 	if method == 'POST':
 		
-		username = form['id']
-		password = form['password']
-		#create engine
-		engine = sql.create_engine('sqlite:///' + join(BASEDIR, 'databases/users.db'))
-		conn = engine.connect()
+		pass	
 		
-		elem['_attr_lvl'] = check_user(username, password, conn) # type: ignore 
-
-		conn.close()
-		elem['_usr'] = username	
-
-		if elem['_attr_lvl'] == 0:
-			toadd = Mk(f"""<p>Wrong username or password</p>""")
-			elem['_usr'] = ""	
-			
-			
    
-	elem['content'] = Mk(f"""       <section>
-									<h3>Log In</h3>
+	elem['content'] = Mk(f"""   <section>
+									<h3>Admin panel</h3>
 									
-									<form method="post" >
+									<form method="post">
 	
 										<div class="row gtr-uniform">
 	
-											{logger("Username")} 
+											{txt("id", "Username")} 
+											
+											{selector_inc("attr",["None", "User", "Employee", "Admin", "Super User"], "Attribution")}
 										
 	
 											{submit("Log In")}

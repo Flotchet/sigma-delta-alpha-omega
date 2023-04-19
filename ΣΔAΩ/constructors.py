@@ -52,7 +52,8 @@ class elements():
         self.scripts = self._scripts()
         self.head = self._head(title)
         self.header = self._header()
-        self.usr = title
+        self._usr = ""
+        self._attr_lvl = 0
         self.menu = self._menu(applets)
         self.side_footer = self._footer(authors)
         self.content = "No content"

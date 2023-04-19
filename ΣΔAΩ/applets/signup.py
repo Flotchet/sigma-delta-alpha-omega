@@ -1,16 +1,40 @@
 from flask import Markup as Mk
-
+import sqlalchemy as sql
 
 from os.path import join, dirname, abspath
 BASEDIR = abspath(dirname(__file__))
 RESSOURCES = join(BASEDIR, 'ressources')
+SIGNUPRESSOURCES = join(BASEDIR, 'sign_up_ressources')
 import sys
 sys.path.append(RESSOURCES)
-from buttons import *
+sys.path.append(SIGNUPRESSOURCES)
+sys.path.append(BASEDIR)
+from buttons import * # type: ignore
+from create_user import * # type: ignore
 
 
 def signup(elem, method, form, args):
-    elem['content'] = Mk(f"""       <section>
+    
+	test = ""
+	if method == 'POST':
+
+		username = form['id']
+		password = form['password']
+		password2 = form['password2']
+		#create engine
+
+		engine = sql.create_engine('sqlite:///' + join(BASEDIR, 'databases/users.db'))
+		conn = engine.connect()
+		
+
+		test = create_user(username, password, password2, conn) # type: ignore
+
+
+		conn.close()
+	
+
+
+	elem['content'] = Mk(f"""       <section>
 									<h3>Sign up</h3>
 									
 									<form method="post">
@@ -21,10 +45,12 @@ def signup(elem, method, form, args):
 
 											{breaker()}
 
-											{pwd("Password2", "repeat password")}
+											{pwd("password2", "repeat password")}
 	
 											{submit("Sign up")}
+
 										</div>
 									</form>
+									{test}
 								</section>""")
-    return elem
+	return elem

@@ -1,6 +1,13 @@
 from flask import Markup as Mk
 
 def home(elem, method, form, args):
+
+    elem['search'] = Mk(f"""Hello there ! you are logged in as {elem['_usr']}.""")
+
+    if not elem['_attr_lvl']:
+        elem['search'] = Mk("""Hello there ! you are not logged in. Please log in or sign up to access the full content of this website.""")
+    
+
     elem['content'] = Mk("""
                             <div class="row gtr-200">
                                 <div class="col-6 col-12-medium">
@@ -26,5 +33,5 @@ def home(elem, method, form, args):
                                 </div>
                             </div>
                                              """)
-    elem['side_content'] = Mk("""<br> <br> <script src="//rss.bloople.net/?url=https%3A%2F%2Fsearch.cnbc.com%2Frs%2Fsearch%2Fcombinedcms%2Fview.xml%3FpartnerId%3Dwrss01%26id%3D100727362&limit=25&showtitle=false&type=js"></script> """)
+    elem['side_content'] = Mk("""<br> <br> <script src="//rss.bloople.net/?url=https%3A%2F%2Fsearch.cnbc.com%2Frs%2Fsearch%2Fcombinedcms%2Fview.xml%3FpartnerId%3Dwrss01%26id%3D100727362&limit=25&showtitle=false&type=js"></script> </nav>""")
     return elem
