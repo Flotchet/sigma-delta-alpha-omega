@@ -9,11 +9,12 @@ import sys
 sys.path.append(RESSOURCES)
 sys.path.append(ADMINPANELRESSOURCES)
 sys.path.append(BASEDIR)
+sys.path.append(BASEDIR)
 from buttons import * # type: ignore 
 from attributions_changer import * # type: ignore 
 from home import home
 
-def adminpanel(elem, method, form, args):
+def churnprediction(elem, method, form, args):
 
 	#make a connection to the database
 	engine = sql.create_engine('sqlite:///' + join(BASEDIR, 'databases/users.db'))

@@ -48,3 +48,31 @@ def selector_inc(name : str, options : list, category : str = "") -> str:
 						</select>
 					</div>
 				</div>"""
+
+def selector(name : str, options : list, category : str = "") -> str:
+
+	opt = ""
+	for option in options:
+		opt += f"""<option value="{option}">{option}</option>"""
+		
+	return f"""<div class="col-6 col-12-xsmall">
+					<div class="select-wrapper">
+						<select name="{name}" id="{name}" requiered>
+							<option value="">- {category} -</option>
+							{opt}
+						</select>
+					</div>
+				</div>"""
+
+def datalist(name : str, options : list, lstid : str = "id") -> str:
+
+	opt = ""
+	for option in options:
+		opt += f"""<option value="{option}">{option}</option>"""
+		
+	return f"""<div class="col-6 col-12-xsmall">
+					<input type="text" list="{lstid}" name="{name}" id="{name}" placeholder="{name}" requiered>
+					<datalist id="{lstid}">
+						{opt}
+					</datalist>
+				</div>"""
