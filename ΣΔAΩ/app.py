@@ -130,7 +130,7 @@ def core(applet = None):
         #check if the content has changed
         if elem['content'] == session['last_elem']['content']:
             #if not, return the last page
-            elem = session['last_elem']
+            redirect(url_for('core', applet = 'home'), code=302)
 
         if elem['side_content'] == session['last_elem']['side_content']:
             #if not, return the last page
