@@ -19,7 +19,8 @@ this folder will contain all the python files that are needed for your applet to
 Third you need to create a python file in the applet folder. This file will contain the code for your applet. It must be named {name of your ini file}.py.
 
 Fourth you need to create to create only one function called {name of your ini file} with these arguments 
-elem, method, form, args
+elem, method, form, args this function must return only the modified elem 
+
 
 elem is all the HTML content that your applet will be displayed in
 it also contains the following keys and type:
