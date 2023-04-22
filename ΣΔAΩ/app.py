@@ -1,3 +1,9 @@
+# Dynamic web app for the ΣΔAΩ project
+# Author: Florent Maisse
+
+
+# Dynamic import of applets and configuration files
+
 from __future__ import annotations
 
 from os import listdir
@@ -35,30 +41,21 @@ def ini_reader(location : str) -> dict():
 
 applets_ini = {applet: ini_reader(join(CONFIGDIR, f'{applet}.ini')) for applet in applets}
 
+# imports
 
 from flask import Flask, render_template, request, url_for, session, Response, g, redirect, Markup as Mk
-from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy.sql import func
-from werkzeug.local import LocalProxy
 from waitress import serve
-
-from datetime import datetime as dt
-from time import sleep as wait
-
 import secrets
 
-basedir = abspath(dirname(__file__))
+
+
+
+
+# app configuration
 
 app = Flask(__name__, template_folder='templates', static_folder='static')
 
 app.config['SECRET_KEY'] = secrets.token_urlsafe(16)
-
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + join(basedir, 'databases/core.db') 
-app.config['SQLALCHEMY_BINDS'] = {
-    'users': 'sqlite:///' + join(basedir, 'databases/users.db')
-    }
-
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 UPLOAD_FOLDER = 'uploads'
 ALLOWED_DATA_EXTENSIONS = {'csv', 'db', 'txt'}
@@ -66,8 +63,6 @@ ALLOWED_DATA_EXTENSIONS = {'csv', 'db', 'txt'}
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.config['MAX_CONTENT_LENGTH'] = 16 * 1000 * 1000
 app.config["DEBUG"] = True
-
-db = SQLAlchemy(app)
 
 
 
@@ -110,6 +105,7 @@ def core(applet = None):
         elem = elements(applets = applets_attr.keys(), authors = "Florent Maisse")
         elem = elem()
         session['elem'] = elem
+        session['last_applet'] = applet
 
     try:
         #try to call the applet and pass the elem object and the methods
@@ -129,7 +125,24 @@ def core(applet = None):
         elem = applets_attr['home'](elem, request.method, request.form, request.args)
         session['elem'] = elem
 
+    #if the applet has changed
+    if applet != session['last_applet']:
+        #check if the content has changed
+        if elem['content'] == session['last_elem']['content']:
+            #if not, return the last page
+            elem = session['last_elem']
+
+        if elem['side_content'] == session['last_elem']['side_content']:
+            #if not, return the last page
+            elem['side_content'] = ""
+
+
+
     elem['menu'] = menu(elem)
+    session['last_elem'] = elem
+    session['last_applet'] = applet
+
+
 
     return render_template('base.html',
         head = elem['head'],
