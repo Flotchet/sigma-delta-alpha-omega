@@ -49,7 +49,9 @@ import secrets
 
 
 
-
+#print applet attributes
+for applet in applets:
+    print(applet, applets_attr[applet])
 
 # app configuration
 
@@ -125,6 +127,11 @@ def core(applet = None):
         elem = applets_attr['home'](elem, request.method, request.form, request.args)
         session['elem'] = elem
 
+    try:
+        session['last_elem']
+    except:
+        session['last_elem'] = elem
+
     #if the applet has changed
     if applet != session['last_applet']:
         #check if the content has changed
@@ -136,7 +143,7 @@ def core(applet = None):
             #if not, return the last page
             elem['side_content'] = ""
 
-
+    
 
     elem['menu'] = menu(elem)
     session['last_elem'] = elem
