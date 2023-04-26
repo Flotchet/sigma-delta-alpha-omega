@@ -1,6 +1,6 @@
 # Sigma Delta Alpha Omega
 
-Sigma Delta Alpha Omega is a highly dynamic & customizable application made with incremental programming, object oriented prgramming & functional programming principles.
+Sigma Delta Alpha Omega is a highly dynamic & customizable application made with incremental programming & object oriented prgramming principles.
 
 ## What is incremental programming?
 
@@ -9,10 +9,6 @@ Incremental programming is a computer programming model that organizes software 
 ## What is object oriented programming?
 
 Object-oriented programming (OOP) is a computer programming model that organizes software design around data, or objects, rather than functions and logic.
-
-## What is functional programming?
-
-Functional programming (FP) is an approach to software development that uses pure functions to create maintainable software.
 
 ## Authors
 
