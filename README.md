@@ -1,24 +1,27 @@
-
 # Sigma Delta Alpha Omega
+
 Sigma Delta Alpha Omega is a highly dynamic & customizable application made with incremental programming, object oriented prgramming & functional programming principles.
 
-## What is incremental programming? 
+## What is incremental programming?
+
 Incremental programming is a computer programming model that organizes software design arround cores and modules. Where the cores can perfecly work without the module and where the software will continue to work without any modification to the cores if a new module is added (assuming that the module respect the cores specification).
 
 ## What is object oriented programming?
+
 Object-oriented programming (OOP) is a computer programming model that organizes software design around data, or objects, rather than functions and logic.
 
-## What is functional programming? 
+## What is functional programming?
+
 Functional programming (FP) is an approach to software development that uses pure functions to create maintainable software.
 
 ## Authors
 
 - [@flotchet](https://www.github.com/flotchet)
 
-
 ## Schematic of how the app works
 
-![Schematic of the app](README/images/schematic.png)
+![Schematic of the app](README/images/schematicbg.png)
+
 ## How to create your applet
 
 First of all you need to create an ini file. This is where you put all the information about your applet. It's very easy to do. Just open up notepad and type in the following:
@@ -35,13 +38,12 @@ dep1 = the name of the second dependency
 depN = the name of the Nth dependency
 
 Second you need to create a folder in the applets folder. The name of the folder must be the name of your applet with the word ressources at the end
-this folder will contain all the python files that are needed for your applet to work. 
+this folder will contain all the python files that are needed for your applet to work.
 
 Third you need to create a python file in the applet folder. This file will contain the code for your applet. It must be named {name of your ini file}.py.
 
-Fourth you need to create to create only one function called {name of your ini file} with these arguments 
-elem, method, form, args this function must return only the modified elem 
-
+Fourth you need to create to create only one function called {name of your ini file} with these arguments
+elem, method, form, args this function must return only the modified elem
 
 elem is all the HTML content that your applet will be displayed in
 it also contains the following keys and type:
