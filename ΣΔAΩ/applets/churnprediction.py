@@ -113,7 +113,7 @@ def churnprediction(elem, method, form, args):
 
 			
 		
-	result = "The client is not going to churn"
+	result = ""
 	elem['content'] = Mk(f"""   <div class="wrapper">
 								<div class="inner">
 									<!-- Form -->
