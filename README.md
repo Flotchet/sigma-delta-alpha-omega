@@ -26,6 +26,7 @@ Functional programming (FP) is an approach to software development that uses pur
 
 First of all you need to create an ini file. This is where you put all the information about your applet. It's very easy to do. Just open up notepad and type in the following:
 
+```bash
 min_lvl = integer between 0 and 4
 max_lvl = integer between 0 and 4 (must be greater or equal than min_lvl)
 name = the name of your applet
@@ -36,6 +37,7 @@ dep0 = the name of the first dependency
 dep1 = the name of the second dependency
 ...
 depN = the name of the Nth dependency
+```
 
 Second you need to create a folder in the applets folder. The name of the folder must be the name of your applet with the word ressources at the end
 this folder will contain all the python files that are needed for your applet to work.
