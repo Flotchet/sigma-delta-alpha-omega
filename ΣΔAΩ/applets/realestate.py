@@ -32,8 +32,6 @@ def realestate(elem, method, form, args):
 	result = ""
 
 	if method == 'POST':
-
-		print(form)
 		#category
 		immo = form['category']
     	#zipcode
@@ -124,7 +122,7 @@ def realestate(elem, method, form, args):
 				
 			if zipcode not in zipcode_converter.keys():
 				
-				result+=f"Sorry the zipcode: {zipcode} doesn't exist"
+				result+=f"\n Sorry the zipcode: {zipcode} doesn't exist passing on default 'Liège' \n"
 				 
 				zipcode = 4000
 
@@ -137,7 +135,7 @@ def realestate(elem, method, form, args):
 			
 			if zipcode not in tax_converter:
 				
-				result+=f"Sorry the zipcode: {zipcode} doesn't refer to a city tax"
+				result+=f"\n Sorry the zipcode: {zipcode} doesn't refer to a city tax passing on default 'Liège' \n"
 
 				zipcode = 4000		
 				
