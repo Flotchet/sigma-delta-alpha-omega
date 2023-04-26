@@ -4,7 +4,7 @@ Sigma Delta Alpha Omega is a highly dynamic & customizable application made with
 
 ## What is incremental programming?
 
-Incremental programming is a computer programming model that organizes software design arround cores and modules. Where the cores can perfecly work without the modules and where the software will continue to work without any modification to the cores if a new module is added (assuming that the module respect the cores specification). The philosophy of incremental programming is keep it working at all time.
+Incremental programming is a computer programming model that organizes software design arround cores and modules. Where the cores can perfecly work without the modules and where the software will continue to work without any modification to the cores if a new module is added (assuming that the module respect the cores specification). The philosophy of incremental programming is "keep it working".
 
 ## Authors
 
