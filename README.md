@@ -47,6 +47,8 @@ elem, method, form, args this function must return only the modified elem
 
 elem is all the HTML content that your applet will be displayed in
 it also contains the following keys and type:
+
+```bash
     head : Markdown         = Markdown(String)
     header : Markdown       = Markdown(String)
     content : Markdown      = Markdown(String)
@@ -58,6 +60,8 @@ it also contains the following keys and type:
 
     _attr_lvl : int     = Integer (0-4) MUST NOT BE CHANGED BY YOUR APPLET
     _usr : str          = String MUST NOT BE CHANGED BY YOUR APPLET
+
+```
 
 Method is the method that is used to call your applet. It can be either 'GET', 'POST', 'PUT', 'DELETE', 'SUPER'.
 
