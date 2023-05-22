@@ -1,7 +1,6 @@
 # Dynamic web app for the ΣΔAΩ project
 # Author: Florent Maisse
 
-
 # Dynamic import of applets and configuration files
 
 from __future__ import annotations
@@ -46,7 +45,6 @@ applets_ini = {applet: ini_reader(join(CONFIGDIR, f'{applet}.ini')) for applet i
 from flask import Flask, render_template, request, url_for, session, Response, g, redirect, Markup as Mk
 from waitress import serve
 import secrets
-
 
 
 #print applet attributes
