@@ -1,10 +1,20 @@
 # Sigma Delta Alpha Omega
 
-Sigma Delta Alpha Omega is a highly dynamic & customizable application made with incremental programming & object oriented prgramming principles.
+Sigma Delta Alpha Omega is a highly dynamic & customizable application made with modular programming & object oriented prgramming principles.
 
-## What is incremental programming?
+## What is modular programming?
 
-Incremental programming is a computer programming model that organizes software design arround cores and modules. Where the cores can perfecly work without the modules and where the software will continue to work without any modification to the cores if a new module is added (assuming that the module respect the cores specification). The philosophy of incremental programming is "keep it working". 
+Modular programming is a software design technique that emphasizes separating the functionality of a program into independent, interchangeable modules, such that each contains everything necessary to execute only one aspect of the desired functionality.
+
+Conceptually, modules represent a separation of concerns, and can be independently created, tested, modified or updated, then reused across multiple systems. This modularization of code contributes to reusability, scalability, and efficiency, making it easier to understand, maintain and debug.
+
+Modules are often incorporated through interfaces. A module interface expresses the elements that are provided and required by the module. The elements defined in the interface are detectable by other modules. The implementation contains the working code that corresponds to the elements declared in the interface.
+
+Programming languages have different levels of modularity, from minimal language support (C, FORTRAN) to moderate modularization (Java, C++) to high modularization (Ada, Modula, Pascal, Python).
+
+## What is coming next ?
+
+Adaptation of the rest of the applets from previous projects
 
 ## Authors
 
